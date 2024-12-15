@@ -1,5 +1,7 @@
 # home-manager
 
+forever a wip
+
 ## Setup
 
 - Adapt "username" and "system" within the [flake.nix](./flake.nix) file.

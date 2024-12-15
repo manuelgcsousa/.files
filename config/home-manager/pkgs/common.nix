@@ -7,7 +7,6 @@ with pkgs; [
   just
   macchina
   ripgrep
-  stow
   tabiew
   tmux
   tree

@@ -139,5 +139,7 @@ function fcheckout() {
 }
 
 
+#
 # direnv
+#
 eval "$(direnv hook zsh)"

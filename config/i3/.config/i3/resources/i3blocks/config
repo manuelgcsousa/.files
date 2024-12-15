@@ -1,0 +1,34 @@
+# i3blocks config
+
+# global properties
+command=$HOME/.config/i3/resources/i3blocks/blocks/$BLOCK_NAME
+markup=none
+full_text=|
+align=center
+separator=false
+separator_block_width=8
+
+
+# blocks (in order)
+
+[caps]
+interval=once
+signal=11
+
+[separator]
+
+[volume]
+interval=once
+signal=2
+
+[separator]
+
+[battery]
+interval=5
+
+[separator]
+
+[datetime]
+interval=3
+
+[separator]

@@ -1,0 +1,126 @@
+#
+# defaults
+#
+
+after-login-command = []
+after-startup-command = [
+    # JankyBorders
+    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+]
+
+start-at-login = true
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+accordion-padding = 30
+
+default-root-container-layout = 'tiles'
+
+default-root-container-orientation = 'auto'
+
+key-mapping.preset = 'qwerty'
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+
+#
+# gaps
+#
+
+[gaps]
+inner.horizontal = 10
+inner.vertical   = 10
+outer.left       = 10
+outer.bottom     = 10
+outer.top        = 10
+outer.right      = 10
+
+
+#
+# 'main' binding mode declaration (must be always presented)
+#
+[mode.main.binding]
+
+# focus window
+cmd-left = 'focus left'
+cmd-down = 'focus down'
+cmd-up = 'focus up'
+cmd-right = 'focus right'
+
+# swap windows
+cmd-shift-left = 'move left'
+cmd-shift-down = 'move down'
+cmd-shift-up = 'move up'
+cmd-shift-right = 'move right'
+
+# move to workspace
+cmd-1 = 'workspace 1'
+cmd-2 = 'workspace 2'
+cmd-3 = 'workspace 3'
+cmd-4 = 'workspace 4'
+cmd-5 = 'workspace 5'
+cmd-6 = 'workspace 6'
+cmd-7 = 'workspace 7'
+cmd-8 = 'workspace 8'
+cmd-9 = 'workspace 9'
+cmd-m = 'workspace M'
+
+# move window to workspace
+cmd-shift-1 = 'move-node-to-workspace 1'
+cmd-shift-2 = 'move-node-to-workspace 2'
+cmd-shift-3 = 'move-node-to-workspace 3'
+cmd-shift-4 = 'move-node-to-workspace 4'
+cmd-shift-5 = 'move-node-to-workspace 5'
+cmd-shift-6 = 'move-node-to-workspace 6'
+cmd-shift-7 = 'move-node-to-workspace 7'
+cmd-shift-8 = 'move-node-to-workspace 8'
+cmd-shift-9 = 'move-node-to-workspace 9'
+cmd-shift-m = 'move-node-to-workspace M'
+
+alt-shift-space = 'layout floating tiling'
+alt-f = 'fullscreen'
+
+# disable "hide application" \
+# disable "hide others"
+cmd-h = []
+cmd-alt-h = []
+
+
+#
+# resize mode
+#
+
+alt-r = 'mode resize'
+
+[mode.resize.binding]
+left = 'resize width -50'
+down = 'resize height +50'
+up = 'resize height -50'
+right = 'resize width +50'
+enter = 'mode main'
+esc = 'mode main'
+
+
+#
+# workspace monitor assignment
+#
+[workspace-to-monitor-force-assignment]
+9 = 'secondary'
+
+
+#
+# application workspace mapping
+#
+
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+run = "move-node-to-workspace 1"
+
+[[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = "move-node-to-workspace 9"

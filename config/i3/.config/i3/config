@@ -1,0 +1,182 @@
+# mod key (super)
+set $mod Mod4
+
+# define default apps commands
+set $TERMINAL      "WINIT_X11_SCALE_FACTOR=1 $HOME/.cargo/bin/alacritty"
+set $BAR           "i3blocks -c $HOME/.config/i3/resources/i3blocks/config"
+set $LAUNCHER      "rofi -show run -theme $HOME/.config/i3/resources/rofi/config.rasi"
+set $NOTIFICATIONS "dunst -conf $HOME/.config/i3/resources/dunst/dunstrc"
+
+# define workspace names
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $MISC "MISC"
+
+# assign workspace to monitor
+workspace $ws1  output primary
+workspace $ws2  output primary
+workspace $ws3  output primary
+workspace $ws4  output primary
+workspace $ws5  output primary
+workspace $ws6  output primary
+workspace $ws7  output primary
+workspace $ws8  output primary
+workspace $ws9  output primary
+workspace $ws10 output secondary
+workspace $MISC output primary
+
+# i3 default font \
+# default border with no window title \
+# gaps \
+# mouse+$mod to move floating windows
+font pango:Fira Sans Regular 11
+for_window [class="^.*"] border pixel 2
+gaps inner 5
+floating_modifier $mod
+
+# status bar
+bar {
+    status_command $BAR
+    output primary
+    position top
+    colors {
+        background #151515
+    }
+}
+
+# resize mode
+mode "resize" {
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# gaps mode
+set $mode_gaps Gaps: + | - | 0
+mode "$mode_gaps" {
+    bindsym plus  gaps inner current plus 5
+    bindsym minus gaps inner current minus 5
+    bindsym 0     gaps inner current set 0
+
+    bindsym Return mode "$mode_gaps"
+    bindsym Escape mode "default"
+}
+
+# startup applications
+# network-manager; notifications; displays; background
+exec --no-startup-id nm-applet &
+exec --no-startup-id $NOTIFICATIONS
+exec --no-startup-id "$HOME/.config/i3/resources/scripts/monitor-bootstrap laptop"
+exec --no-startup-id xsetroot -solid "#333333"
+
+
+# =============================================================================
+# keychords
+# =============================================================================
+
+# start a terminal
+bindsym $mod+Return exec --no-startup-id $TERMINAL
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# reload the configuration file \
+# restart i3 inplace \
+# exit i3
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "$HOME/.config/i3/resources/scripts/powermenu"
+
+# program launcher
+bindsym $mod+space exec $LAUNCHER
+
+# monitor/display bootstrap
+bindsym $mod+Shift+b exec "$HOME/.config/i3/resources/scripts/monitor-bootstrap"
+
+# screenshot
+bindsym $mod+Shift+p exec "$HOME/.config/i3/resources/scripts/screenshot"
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# swap windows
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+
+# enter resize mode \
+# enter gaps mode
+bindsym $mod+r mode "resize"
+bindsym $mod+g mode "$mode_gaps"
+
+# split in horizontal orientation \
+# split in vertical orientation \
+# enter fullscreen mode for the focused container \
+# use tabbed layout \
+# use default layout \
+# toggle tiling/floating
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+bindsym $mod+t layout tabbed
+bindsym $mod+d layout default
+bindsym $mod+Shift+space floating toggle
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+bindsym $mod+m workspace $misc
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+m move container to workspace $misc
+
+# volume keys
+set $refresh_i3status pkill -RTMIN+2 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set 'Master' 5%+ 1>/dev/null && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set 'Master' 5%- 1>/dev/null && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set 'Master' 1+ toggle 1>/dev/null && $refresh_i3status
+
+# laptop brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brillo -q -A 2
+bindsym XF86MonBrightnessDown exec --no-startup-id brillo -q -U 2
+
+# caps lock signal
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+
+# disable PgUp and PgDown
+bindsym Prior nop
+bindsym Next nop

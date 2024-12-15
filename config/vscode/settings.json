@@ -1,0 +1,39 @@
+{
+  "workbench.startupEditor": "none",
+  "workbench.sideBar.location": "right",
+  "workbench.colorTheme": "Default Dark+",
+  "editor.minimap.enabled": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.cursorBlinking": "solid",
+  "vim.leader": ",",
+  "vim.useSystemClipboard": true,
+  "vim.smartRelativeLine": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [ "<Leader>", "w" ],
+      "commands": [ "workbench.action.files.save" ]
+    },
+    {
+      "before": [ "<Tab>" ],
+      "commands": [ ":tabnext" ]
+    },
+    {
+      "before": [ "<S-Tab>" ],
+      "commands": [ ":tabprevious" ]
+    },
+    {
+      "before": [ "<Leader>", "q" ],
+      "commands": [ ":tabclose" ]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": [ ">" ],
+      "commands": [ "editor.action.indentLines" ]
+    },
+    {
+      "before": [ "<" ],
+      "commands": [ "editor.action.outdentLines" ]
+    }
+  ]
+}

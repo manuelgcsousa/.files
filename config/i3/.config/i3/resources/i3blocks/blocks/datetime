@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+datetime=$(date '+%a, %b %d :: %H:%M')
+
+echo "󱛡   $datetime"
+echo "󱛡   $datetime"
+echo "#FFFFFF"

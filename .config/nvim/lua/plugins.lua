@@ -213,6 +213,7 @@ require("lazy").setup({
   {
     "lewis6991/gitsigns.nvim",
     config = function()
+      -- setup
       require("gitsigns").setup({
         signcolumn = true,
         numhl = false,
@@ -228,6 +229,9 @@ require("lazy").setup({
 
         on_attach = on_attach
       })
+
+      -- mappings
+      vim.keymap.set("n", "<Leader>lb", ":Gitsigns toggle_current_line_blame<CR>", { noremap = true, silent = true })
     end
   },
 

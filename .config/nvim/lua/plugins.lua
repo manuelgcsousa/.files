@@ -101,7 +101,7 @@ require("lazy").setup({
       local dashboard = require("alpha.themes.dashboard")
 
       -- set header
-      dashboard.section.header.val = { "NeoVim" }
+      dashboard.section.header.val = DASHBOARD
 
       -- set buttons
       dashboard.section.buttons.val = {

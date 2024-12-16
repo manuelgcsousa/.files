@@ -1,11 +1,4 @@
---
--- CORE
---
--- =============================================================================
-
---
 -- [[ OPTIONS ]]
---
 
 vim.opt.syntax = "on"                            -- enables syntax highlighting
 vim.opt.mouse = "a"                              -- enables mouse support in all modes
@@ -53,9 +46,7 @@ set listchars+=trail:·
 ]]
 
 
---
 -- [[ FILETYPES ]]
---
 
 local filetype_settings = {
   ["lua"]        = { tabstop = 2, softtabstop = 2, shiftwidth = 2 },
@@ -83,9 +74,7 @@ for filetype, settings in pairs(filetype_settings) do
 end
 
 
---
 -- [[ MAPPINGS ]]
---
 
 vim.g.mapleader = ","
 

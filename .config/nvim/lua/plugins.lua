@@ -34,9 +34,6 @@ require("lazy").setup({
 
           -- plugins
           NvimTreeNormal = { bg = "#181818" },
-          TelescopePromptBorder = { fg = "#DDDDDD", bg = "NONE" },
-          TelescopeResultsBorder = { fg = "#DDDDDD", bg = "NONE" },
-          TelescopePreviewBorder = { fg = "#DDDDDD", bg = "NONE" }
         }
       })
 
@@ -51,26 +48,19 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       -- setup
-      local colors = { white = "#C6C6C6", grey  = "#262626" }
+      local colors = { white = "#C6C6C6", grey = "#262626" }
+      local section_theme = {
+        a = { fg = colors.white, bg = colors.grey, gui = "bold" },
+        b = { fg = colors.white, bg = colors.grey },
+      }
+
       require("lualine").setup({
         options = {
           theme = {
-            normal = {
-              a = { fg = colors.white, bg = colors.grey, gui = "bold" },
-              b = { fg = colors.white, bg = colors.grey },
-            },
-            insert = {
-              a = { fg = colors.white, bg = colors.grey, gui = "bold" },
-              b = { fg = colors.white, bg = colors.grey },
-            },
-            visual = {
-              a = { fg = colors.white, bg = colors.grey, gui = "bold" },
-              b = { fg = colors.white, bg = colors.grey },
-            },
-            replace = {
-              a = { fg = colors.white, bg = colors.grey, gui = "bold" },
-              b = { fg = colors.white, bg = colors.grey },
-            }
+            normal = section_theme,
+            insert = section_theme,
+            visual = section_theme,
+            replace = section_theme
           },
         },
         sections = {
@@ -81,7 +71,7 @@ require("lazy").setup({
             }
           },
           lualine_b = { { "filename", path = 3 } },
-          lualine_c = {},
+          lualine_c = { },
           lualine_x = { "branch" },
           lualine_y = { "location" },
           lualine_z = { "progress" }
@@ -117,12 +107,12 @@ require("lazy").setup({
 
       -- center the dashboard
       dashboard.opts.layout = {
-          { type = "padding", val = 5 },
-          dashboard.section.header,
-          { type = "padding", val = 2 },
-          dashboard.section.buttons,
-          { type = "padding", val = 1 },
-          dashboard.section.footer,
+        { type = "padding", val = 5 },
+        dashboard.section.header,
+        { type = "padding", val = 2 },
+        dashboard.section.buttons,
+        { type = "padding", val = 1 },
+        dashboard.section.footer,
       }
 
       -- setup
@@ -135,6 +125,13 @@ require("lazy").setup({
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+      -- setup
+      require("fzf-lua").setup({
+        winopts = {
+          border = "single"
+        }
+      })
+
       -- keymaps
       vim.keymap.set("n", "<C-f>",      ":FzfLua files<CR>",      { noremap = true, silent = true })
       vim.keymap.set("n", "<C-b>",      ":FzfLua buffers<CR>",    { noremap = true, silent = true })
@@ -226,8 +223,6 @@ require("lazy").setup({
           delay = 0,
           ignore_whitespace = false,
         },
-
-        on_attach = on_attach
       })
 
       -- mappings
@@ -248,11 +243,22 @@ require("lazy").setup({
     config = true
   },
 
+  -- [[ mini.cursorword ]]
+  {
+    "echasnovski/mini.cursorword",
+    version = "*",
+    config = function()
+      require("mini.cursorword").setup({
+        delay = 2000
+      })
+    end
+  },
+
   -- [[ nvim-lspconfig ]]
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
     },
     config = function()
       -- LSP setup
@@ -291,25 +297,12 @@ require("lazy").setup({
         }
       }
 
-      local custom_float_border = function()
-        return {
-          {"🭽", "FloatBorder"},
-          {"▔", "FloatBorder"},
-          {"🭾", "FloatBorder"},
-          {"▕", "FloatBorder"},
-          {"🭿", "FloatBorder"},
-          {"▁", "FloatBorder"},
-          {"🭼", "FloatBorder"},
-          {"▏", "FloatBorder"},
-        }
-      end
-
       for _, config in pairs(configs) do
         lsp[config.server].setup({
           settings = config.settings or {},
           handlers = {
-            ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = custom_float_border() }),
-            ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = custom_float_border() }),
+            ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
+            ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
           }
         })
       end
@@ -334,7 +327,7 @@ require("lazy").setup({
         severity_sort = true,
         float = {
           focusable = false,
-          border = custom_float_border()
+          border = "single"
         }
       })
 
@@ -362,80 +355,42 @@ require("lazy").setup({
     }
   },
 
-  -- [[ nvim-cmp ]]
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "onsails/lspkind-nvim"
-    },
-    config = function()
-      local cmp = require("cmp")
+    "saghen/blink.cmp",
+    version = "v0.*",
+    opts = {
+      keymap = {
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+      },
 
-      local check_backspace = function()
-        local col = vim.fn.col "." - 1
-        return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-      end
+      appearance = {
+        -- sets the fallback highlight groups to nvim-cmp's
+        use_nvim_cmp_as_default = true,
 
-      cmp.setup{
-        mapping = {
-          ["<CR>"] = cmp.mapping.confirm{ select = true },
+        -- use 'mono' nerd-font
+        nerd_font_variant = "mono"
+      },
 
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif check_backspace() then
-              fallback()
-            else
-              fallback()
-            end
-          end, {
-            "i",
-            "s"
-          }),
+      sources = {
+        default = { "lsp", "path", "buffer" },
+      },
 
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
-            end
-          end, {
-            "i",
-            "s"
-          }),
-
-          ["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-5), { "i", "c" }),
-          ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(5), { "i", "c" })
-        },
-
-        formatting = {
-          format = require("lspkind").cmp_format({
-            with_text = true,
-            maxwidth = 50
-          })
-        },
-
-        sources = {
-          { name = "nvim_lsp" },
-          { name = "path" },
-          { name = "buffer", keyword_length = 4 }
-        },
-
-        window = {
-          documentation = {
+      completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 100,
+          window = {
             border = "single"
-          }
+          },
         },
+      },
+    },
 
-        experimental = {
-          ghost_text = true
-        }
-      }
-    end
+    opts_extend = { "sources.default" }
   },
 
 })

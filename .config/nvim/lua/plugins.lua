@@ -28,7 +28,7 @@ require("lazy").setup({
 
         group_overrides = {
           -- defaults
-          CursorLine = { bg = "#262626" },
+          CursorLine = { bg = "#1E1E1E" },
           CursorLineNr = { fg = "#FFFFFF" },
           ModeMsg = { fg = c.vscFront, bg = "#1C1C1C" },
 

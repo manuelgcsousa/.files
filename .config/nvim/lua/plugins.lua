@@ -243,71 +243,48 @@ require("lazy").setup({
     config = true
   },
 
-  -- [[ mini.cursorword ]]
-  {
-    "echasnovski/mini.cursorword",
-    version = "*",
-    config = function()
-      require("mini.cursorword").setup({
-        delay = 2000
-      })
-    end
-  },
-
   -- [[ nvim-lspconfig ]]
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "saghen/blink.cmp",
+      "hrsh7th/nvim-cmp"
     },
     config = function()
       -- LSP setup
       local lsp = require("lspconfig")
 
-      local configs = {
-        python = {
-          server = "pyright",
+      -- servers
+      local servers = {
+        ["pyright"] = {
           settings = {
             python = {
               analysis = {
                 typeCheckingMode = "basic",
-                diagnosticMode = "openFilesOnly"
-              }
-            }
-          }
+                diagnosticMode = "openFilesOnly",
+              },
+            },
+          },
         },
-        terraform = {
-          server = "terraformls"
-        },
-        go = {
-          server = "gopls"
-        },
-        lua = {
-          server = "lua_ls",
+        ["lua_ls"] = {
           settings = {
             Lua = {
-              diagnostics = {
-                globals = { "vim" }
-              },
-              workspace = {
-                checkThirdParty = false,
-              }
-            }
-          }
-        }
+              diagnostics = { globals = { "vim" } },
+              workspace = { checkThirdParty = false },
+            },
+          },
+        },
+        ["gopls"] = {},
+        ["terraformls"] = {},
       }
-
-      for _, config in pairs(configs) do
-        lsp[config.server].setup({
-          settings = config.settings or {},
-          handlers = {
-            ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
-            ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
-          }
-        })
+      for server, config in pairs(servers) do
+        config.handlers = {
+          ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
+          ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
+        }
+        lsp[server].setup(config)
       end
 
-      -- Handlers setup
+      -- Diagnostics setup
       local signs = {
         { name = "DiagnosticSignError", text = "" },
         { name = "DiagnosticSignWarn",  text = "" },
@@ -355,42 +332,47 @@ require("lazy").setup({
     }
   },
 
+  -- [[ nvim-cmp ]]
   {
-    "saghen/blink.cmp",
-    version = "v0.*",
-    opts = {
-      keymap = {
-        ["<CR>"] = { "accept", "fallback" },
-        ["<Tab>"] = { "select_next", "fallback" },
-        ["<S-Tab>"] = { "select_prev", "fallback" },
-        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
-        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
-      },
-
-      appearance = {
-        -- sets the fallback highlight groups to nvim-cmp's
-        use_nvim_cmp_as_default = true,
-
-        -- use 'mono' nerd-font
-        nerd_font_variant = "mono"
-      },
-
-      sources = {
-        default = { "lsp", "path", "buffer" },
-      },
-
-      completion = {
-        documentation = {
-          auto_show = true,
-          auto_show_delay_ms = 100,
-          window = {
-            border = "single"
-          },
-        },
-      },
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "onsails/lspkind.nvim"
     },
+    config = function()
+      local cmp = require("cmp")
 
-    opts_extend = { "sources.default" }
+      cmp.setup({
+        sources = {
+          { name = "nvim_lsp" },
+          { name = "path" },
+          { name = "buffer", keyword_length = 4 },
+        },
+
+        mapping = cmp.mapping.preset.insert({
+          ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-5),
+          ["<C-d>"] = cmp.mapping.scroll_docs(5),
+        }),
+
+        formatting = {
+          format = require("lspkind").cmp_format({
+            mode = "symbol_text",
+            maxwidth = 50
+          })
+        },
+
+        window = {
+          documentation = {
+            border = "single"
+          }
+        }
+      })
+    end
   },
 
 })

@@ -1,22 +1,20 @@
 #
-# env
+# ENV
 #
 
-# 256 colors term
 export TERM="xterm-256color"
-
-# defaults
 export TERMINAL="kitty"
-export EDITOR="nvim"
+export EDITOR="vim"
 export LANG=pt_PT.UTF-8
+export LC_MESSAGES=en_US.UTF-8
 
-# go
+# go's workspace
 export GOPATH="$HOME/.local/share/go"
 
-# docker on arm?
-[[ $(uname -m) == "arm64" ]] && export DOCKER_DEFAULT_PLATFORM=linux/arm64
+# pyenv
+eval "$(pyenv init -)"
 
-# fzf key bindings and fuzzy completion
+# fzf key bindings
 source <(fzf --zsh)
 
 
@@ -25,9 +23,9 @@ source <(fzf --zsh)
 #
 
 function pathadd() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="${PATH:+"$PATH:"}$1"
-    fi
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    PATH="${PATH:+"$PATH:"}$1"
+  fi
 }
 
 pathadd "/opt/homebrew/bin"
@@ -37,11 +35,6 @@ pathadd "$HOME/.scripts"
 pathadd "/usr/local/go/bin"
 pathadd "$GOPATH"
 pathadd "$HOME/.cargo/bin"
-pathadd "/opt/gradle/gradle-8.5/bin"
-pathadd "$HOME/.bun/bin"
-
-# pyenv within PATH
-eval "$(pyenv init -)"
 
 
 #
@@ -50,12 +43,12 @@ eval "$(pyenv init -)"
 
 # prompt
 function parse_git_branch() {
-    branch=$(git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\1/p')
-    [ $branch ] && echo " :: %F{green}$branch%f"
+  branch=$(git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\1/p')
+  [ $branch ] && echo " :: %F{green}$branch%f"
 }
 
 precmd() {
-    print ""
+  print ""
 }
 
 setopt PROMPT_SUBST
@@ -82,10 +75,10 @@ setopt ignoreeof
 
 # ls colors
 if [[ $(uname -s) == "Linux" ]]; then
-    export LS_COLORS="di=1;36:ln=1;31:so=35:pi=33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=34;43"
+  export LS_COLORS="di=1;36:ln=1;31:so=35:pi=33:ex=1;32:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=34;43"
 else
-    export CLICOLOR=1
-    export LSCOLORS=GxBxfxdxCxegedabagaced
+  export CLICOLOR=1
+  export LSCOLORS=GxBxfxdxCxegedabagaced
 fi
 
 
@@ -95,13 +88,13 @@ fi
 
 # sane defaults
 alias \
-    ..="cd ../" \
-    ls="ls -v --color" \
-    cp="cp -iv" \
-    rm="rm -i" \
-    mv="mv -i" \
-    mkdir="mkdir -p" \
-    grep="grep --color=auto"
+  ..="cd ../" \
+  ls="ls -v --color" \
+  cp="cp -iv" \
+  rm="rm -i" \
+  mv="mv -i" \
+  mkdir="mkdir -p" \
+  grep="grep --color=auto"
 
 # other
 alias tf="terraform"
@@ -137,9 +130,3 @@ function fcheckout() {
     echo 'Current directory is not a git repository.'
   fi
 }
-
-
-#
-# direnv
-#
-eval "$(direnv hook zsh)"

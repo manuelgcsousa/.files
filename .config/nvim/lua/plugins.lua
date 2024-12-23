@@ -128,7 +128,7 @@ require("lazy").setup({
       -- setup
       require("fzf-lua").setup({
         winopts = {
-          border = "single"
+          border = "rounded"
         }
       })
 
@@ -247,7 +247,7 @@ require("lazy").setup({
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "hrsh7th/nvim-cmp"
+      "saghen/blink.cmp"
     },
     config = function()
       -- LSP setup
@@ -278,8 +278,8 @@ require("lazy").setup({
       }
       for server, config in pairs(servers) do
         config.handlers = {
-          ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" }),
-          ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" }),
+          ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+          ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
         }
         lsp[server].setup(config)
       end
@@ -304,7 +304,7 @@ require("lazy").setup({
         severity_sort = true,
         float = {
           focusable = false,
-          border = "single"
+          border = "rounded"
         }
       })
 
@@ -332,47 +332,44 @@ require("lazy").setup({
     }
   },
 
-  -- [[ nvim-cmp ]]
+  -- [[ blink.cmp ]]
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "onsails/lspkind.nvim"
+    "saghen/blink.cmp",
+    version = "v0.*",
+    opts = {
+      keymap = {
+        ["<CR>"] = { "accept", "fallback" },
+        ["<Tab>"] = { "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+      },
+
+      appearance = {
+        -- sets the fallback highlight groups to nvim-cmp's
+        use_nvim_cmp_as_default = true,
+
+        -- use 'mono' nerd-font
+        nerd_font_variant = "mono"
+      },
+
+      sources = {
+        default = { "lsp", "path", "buffer" },
+        cmdline = {},  -- disable cmd completions
+      },
+
+      completion = {
+        list = { selection = 'auto_insert' },
+
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 100,
+          window = { border = "rounded" },
+        },
+      },
     },
-    config = function()
-      local cmp = require("cmp")
 
-      cmp.setup({
-        sources = {
-          { name = "nvim_lsp" },
-          { name = "path" },
-          { name = "buffer", keyword_length = 4 },
-        },
-
-        mapping = cmp.mapping.preset.insert({
-          ["<Tab>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-          ["<C-u>"] = cmp.mapping.scroll_docs(-5),
-          ["<C-d>"] = cmp.mapping.scroll_docs(5),
-        }),
-
-        formatting = {
-          format = require("lspkind").cmp_format({
-            mode = "symbol_text",
-            maxwidth = 50
-          })
-        },
-
-        window = {
-          documentation = {
-            border = "single"
-          }
-        }
-      })
-    end
+    opts_extend = { "sources.default" }
   },
 
 })

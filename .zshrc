@@ -10,12 +10,7 @@ export LC_MESSAGES=en_US.UTF-8
 
 # go's workspace
 export GOPATH="$HOME/.local/share/go"
-
-# pyenv
-eval "$(pyenv init -)"
-
-# fzf key bindings
-source <(fzf --zsh)
+export GOBIN="$GOPATH/bin"
 
 
 #
@@ -34,7 +29,14 @@ pathadd "$HOME/.local/bin"
 pathadd "$HOME/.scripts"
 pathadd "/usr/local/go/bin"
 pathadd "$GOPATH"
+pathadd "$GOBIN"
 pathadd "$HOME/.cargo/bin"
+
+# pyenv
+eval "$(pyenv init -)"
+
+# fzf key bindings
+source <(fzf --zsh)
 
 
 #

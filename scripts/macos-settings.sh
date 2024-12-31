@@ -10,6 +10,9 @@ defaults write -g NSWindowShouldDragOnGesture -bool true
 # show path bar in Finder
 defaults write com.apple.finder ShowPathbar -bool true
 
+# display full POSIX path as Finder window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
 # remove the auto-hiding Dock delay \
 # remove the animation when hiding/showing the Dock
 defaults write com.apple.dock autohide-delay -float 0

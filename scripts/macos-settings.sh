@@ -21,6 +21,11 @@ defaults write com.apple.dock autohide-time-modifier -float 0.5
 # set Dock icon size
 defaults write com.apple.dock "tilesize" -int "38"
 
+# enable Dock magnification \
+# set Dock magnification icon size
+defaults write com.apple.dock magnification -bool true
+defaults write com.apple.dock largesize -int 48
+
 # disable recents apps on Dock
 defaults write com.apple.dock show-recents -bool false
 

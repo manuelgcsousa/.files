@@ -6,6 +6,7 @@ with pkgs; [
   jq
   just
   macchina
+  nodejs_23
   ripgrep
   tabiew
   tmux

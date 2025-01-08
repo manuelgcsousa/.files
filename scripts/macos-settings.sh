@@ -32,10 +32,16 @@ defaults write com.apple.dock show-recents -bool false
 # group windows by application
 defaults write com.apple.dock expose-group-apps -bool true
 
-
-#
-# Restart apps
-#
-
+# restart apps
 killall "Finder" &> /dev/null
 killall "Dock" &> /dev/null
+
+
+#
+# Homebrew setup
+#
+
+if ! command -v brew &>/dev/null; then
+  echo "Installing homebrew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi

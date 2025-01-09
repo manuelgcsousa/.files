@@ -99,8 +99,9 @@ alias \
   grep="grep --color=auto"
 
 # other
-alias tf="terraform"
+alias cat="bat -pp"
 alias icat="kitten icat"
+alias tf="terraform"
 alias hms="home-manager switch"
 
 

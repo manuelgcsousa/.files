@@ -13,8 +13,10 @@ defaults write com.apple.finder ShowPathbar -bool true
 # display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
+# enable auto-hiding \
 # remove the auto-hiding Dock delay \
 # remove the animation when hiding/showing the Dock
+defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock autohide-time-modifier -float 0.5
 
@@ -31,6 +33,10 @@ defaults write com.apple.dock show-recents -bool false
 
 # group windows by application
 defaults write com.apple.dock expose-group-apps -bool true
+
+# key repeat speed
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 30
 
 # restart apps
 killall "Finder" &> /dev/null

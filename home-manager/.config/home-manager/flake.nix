@@ -11,7 +11,7 @@
 
   outputs = { self, nixpkgs, home-manager, ... }:
     let
-      username = "manuelgcsousa";
+      username = "manuel";
       system = "aarch64-darwin";
       pkgs = nixpkgs.legacyPackages.${system};
     in

@@ -22,5 +22,6 @@ with pkgs; [
   terraform-ls
 
   # fonts
+  iosevka
   nerd-fonts.iosevka-term
 ]

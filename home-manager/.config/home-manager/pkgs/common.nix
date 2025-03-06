@@ -8,6 +8,7 @@ with pkgs; [
   just
   macchina
   nodejs_23
+  pyenv
   ripgrep
   tabiew
   tmux

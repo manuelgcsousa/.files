@@ -80,6 +80,7 @@ cmd-shift-m = 'move-node-to-workspace M'
 
 alt-shift-space = 'layout floating tiling'
 alt-f = 'fullscreen'
+alt-t = 'layout v_accordion'
 
 # disable "hide application" \
 # disable "hide others"

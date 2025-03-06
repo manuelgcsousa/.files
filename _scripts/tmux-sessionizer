@@ -7,7 +7,7 @@
 # ==================================================================
 
 directories=(
-  "$HOME/TonicApp/Backend/doctors/api"
+  "$HOME/__DEV__"
 )
 
 if [[ $# -eq 1 ]]; then

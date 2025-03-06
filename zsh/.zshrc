@@ -101,7 +101,6 @@ alias \
 # other
 alias cat="bat -pp"
 alias icat="kitten icat"
-alias tf="terraform"
 alias hms="home-manager switch"
 
 

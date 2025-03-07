@@ -24,7 +24,7 @@ paste() {
   elif isWayland; then
     wl-paste
   else
-    xsel -ob || xclip -selection clipboard -o
+    xclip -selection clipboard -o || xsel -ob
   fi
 }
 

@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# ==================================================================
+# cb (shorthand for "clipboard")
+#
+# Credits: Script taken from "https://github.com/nikitabobko/dotfiles/blob/main/.bin/cb"
+# ==================================================================
+
+set -e
+set -u
+set -o pipefail
+
+isWayland() {
+  [[ -n "${WAYLAND_DISPLAY:-}" ]] || [[ "${XDG_SESSION_TYPE:-}" == "wayland" ]]
+}
+
+isDarwin() {
+  [[ "$(uname)" == "Darwin" ]]
+}
+
+paste() {
+  if isDarwin; then
+    pbpaste
+  elif isWayland; then
+    wl-paste
+  else
+    xsel -ob || xclip -selection clipboard -o
+  fi
+}
+
+copy() {
+  if isDarwin; then
+    pbcopy
+  else
+    if isWayland; then
+      wl-copy
+    else
+      xclip -selection clipboard || xsel -ib
+    fi
+  fi
+}
+
+if [ $# -eq 1 ]; then
+  readlink -f "$1" | xargs echo -n | copy
+elif [ ! -t 0 ]; then
+  copy
+else
+  paste
+fi

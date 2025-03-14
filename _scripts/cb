@@ -21,10 +21,12 @@ isDarwin() {
 paste() {
   if isDarwin; then
     pbpaste
-  elif isWayland; then
-    wl-paste
   else
-    xclip -selection clipboard -o || xsel -ob
+    if isWayland; then
+      wl-paste
+    else
+      xclip -selection clipboard -o || xsel -ob
+    fi
   fi
 }
 

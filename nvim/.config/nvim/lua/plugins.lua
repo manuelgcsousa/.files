@@ -240,6 +240,13 @@ require("lazy").setup({
     end
   },
 
+  -- [[ git-conflict.nvim ]]
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    config = true
+  },
+
   -- [[ vim-surround ]]
   {
     "tpope/vim-surround",

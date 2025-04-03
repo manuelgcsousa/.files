@@ -345,7 +345,7 @@ require("lazy").setup({
   -- [[ blink.cmp ]]
   {
     "saghen/blink.cmp",
-    version = "v0.*",
+    version = '1.*',
     opts = {
       keymap = {
         ["<CR>"] = { "accept", "fallback" },
@@ -365,8 +365,9 @@ require("lazy").setup({
 
       sources = {
         default = { "lsp", "path", "buffer" },
-        cmdline = {},  -- disable cmd completions
       },
+
+      cmdline = { enabled = false },
 
       completion = {
         list = {

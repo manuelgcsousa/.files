@@ -90,6 +90,10 @@ vim.keymap.set("n", "<Leader>c", ":noh<CR>", { noremap = true, silent = true })
 vim.keymap.set("v", "<", "<gv", { silent = true })
 vim.keymap.set("v", ">", ">gv", { silent = true })
 
+-- move selected line / block of text in visual mode
+vim.keymap.set("v", "<S-Down>", ":m '>+1<CR>gv=gv", { silent = true })
+vim.keymap.set("v", "<S-Up>", ":m '<-2<CR>gv=gv", { silent = true })
+
 -- print absolute path of current file
 vim.keymap.set("n", "<Leader>fp", "<cmd>lua print(vim.fn.expand('%:p'))<CR>", { noremap = true, silent = true })
 

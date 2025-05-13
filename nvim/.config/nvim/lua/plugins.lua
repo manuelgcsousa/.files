@@ -216,6 +216,13 @@ require("lazy").setup({
     }
   },
 
+  -- [[ treesitter-context ]]
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = true,
+  },
+
   -- [[ gitsigns.nvim ]]
   {
     "lewis6991/gitsigns.nvim",

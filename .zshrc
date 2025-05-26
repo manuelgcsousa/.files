@@ -12,6 +12,15 @@ export LC_MESSAGES=en_US.UTF-8
 export GOPATH="$HOME/.local/share/go"
 export GOBIN="$GOPATH/bin"
 
+# dotnet
+export DOTNET_ROOT="/usr/local/share/dotnet"
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+
 
 #
 # PATH
@@ -31,6 +40,7 @@ pathadd "/usr/local/go/bin"
 pathadd "$GOPATH"
 pathadd "$GOBIN"
 pathadd "$HOME/.cargo/bin"
+pathadd "$HOME/.dotnet/tools"
 
 # pyenv
 eval "$(pyenv init -)"

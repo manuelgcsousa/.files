@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 
-import os
 import platform
 import sys
 
 from pathlib import Path
 
 
-# path definition
+# path definitions
 DOTFILES_DIR = Path(__file__).resolve().parent
 CONFIG_DIR = Path.home() / ".config"
 CONFIG_SRC_DIR = DOTFILES_DIR / ".config"
@@ -48,7 +47,7 @@ def main():
     # link '$HOME/.zshrc'
     zshrc_source = DOTFILES_DIR / ".zshrc"
     zshrc_target = Path.home() / ".zshrc"
-    
+
     print("Linking '.zshrc'...")
     link(zshrc_source, zshrc_target)
 

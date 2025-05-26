@@ -267,79 +267,6 @@ require("lazy").setup({
     config = true
   },
 
-  -- [[ nvim-lspconfig ]]
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "saghen/blink.cmp"
-    },
-    config = function()
-      -- LSP setup
-      local lsp = require("lspconfig")
-
-      -- servers
-      local servers = {
-        ["pyright"] = {
-          settings = {
-            python = {
-              analysis = {
-                typeCheckingMode = "basic",
-                diagnosticMode = "openFilesOnly",
-              },
-            },
-          },
-        },
-        ["lua_ls"] = {
-          settings = {
-            Lua = {
-              diagnostics = { globals = { "vim" } },
-              workspace = { checkThirdParty = false },
-            },
-          },
-        },
-        ["gopls"] = {},
-        ["terraformls"] = {},
-      }
-      for server, config in pairs(servers) do
-        config.handlers = {
-          ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-          ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-        }
-        lsp[server].setup(config)
-      end
-
-      -- Diagnostics setup
-      local signs = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn",  text = "" },
-        { name = "DiagnosticSignHint",  text = "" },
-        { name = "DiagnosticSignInfo",  text = "" }
-      }
-
-      for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-      end
-
-      vim.diagnostic.config({
-        virtual_text = false,
-        signs = { active = signs },
-        update_in_insert = true,
-        underline = true,
-        severity_sort = true,
-        float = {
-          focusable = false,
-          border = "rounded"
-        }
-      })
-
-      -- Mappings
-      vim.keymap.set("n", "<Leader>r",  ":FzfLua lsp_references<CR>",               { noremap = true, silent = true })
-      vim.keymap.set("n", "<Leader>d",  "<cmd>lua vim.lsp.buf.definition()<CR>",    { noremap = true, silent = true })
-      vim.keymap.set("n", "<Leader>h",  "<cmd>lua vim.lsp.buf.hover()<CR>",         { noremap = true, silent = true })
-      vim.keymap.set("n", "<Leader>sd", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
-    end
-  },
-
   -- [[ conform.nvim ]]
   {
     "stevearc/conform.nvim",
@@ -397,6 +324,81 @@ require("lazy").setup({
     },
 
     opts_extend = { "sources.default" }
+  },
+
+  -- [[ nvim-lspconfig ]]
+  -- LSP configs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      "saghen/blink.cmp"
+    },
+    config = function()
+      -- LSP setup
+      local lsp = require("lspconfig")
+
+      -- servers
+      local servers = {
+        ["pyright"] = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = "basic",
+                diagnosticMode = "openFilesOnly",
+              },
+            },
+          },
+        },
+        ["lua_ls"] = {
+          settings = {
+            Lua = {
+              diagnostics = { globals = { "vim" } },
+              workspace = { checkThirdParty = false },
+            },
+          },
+        },
+        ["gopls"] = {},
+        ["terraformls"] = {},
+        ["csharp_ls"] = {},
+      }
+      for server, config in pairs(servers) do
+        config.handlers = {
+          ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+          ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+        }
+        lsp[server].setup(config)
+      end
+
+      -- Diagnostics setup
+      local signs = {
+        { name = "DiagnosticSignError", text = "" },
+        { name = "DiagnosticSignWarn",  text = "" },
+        { name = "DiagnosticSignHint",  text = "" },
+        { name = "DiagnosticSignInfo",  text = "" }
+      }
+
+      for _, sign in ipairs(signs) do
+        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+      end
+
+      vim.diagnostic.config({
+        virtual_text = false,
+        signs = { active = signs },
+        update_in_insert = true,
+        underline = true,
+        severity_sort = true,
+        float = {
+          focusable = false,
+          border = "rounded"
+        }
+      })
+
+      -- Mappings
+      vim.keymap.set("n", "<Leader>r",  ":FzfLua lsp_references<CR>",               { noremap = true, silent = true })
+      vim.keymap.set("n", "<Leader>d",  "<cmd>lua vim.lsp.buf.definition()<CR>",    { noremap = true, silent = true })
+      vim.keymap.set("n", "<Leader>h",  "<cmd>lua vim.lsp.buf.hover()<CR>",         { noremap = true, silent = true })
+      vim.keymap.set("n", "<Leader>sd", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
+    end
   },
 
 })

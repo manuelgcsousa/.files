@@ -1,0 +1,36 @@
+"" Defaults
+let mapleader = ","
+
+set visualbell
+set noerrorbells
+set relativenumber
+set clipboard+=unnamed
+set scrolloff=10
+set incsearch
+set hlsearch
+
+"" Plugins
+set NERDTree
+
+"" Mappings
+
+" shift (left | right) without leaving visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" clear search highlights
+nnoremap <Leader>c :noh<CR>
+
+" tab navigation
+nnoremap <Tab> :tabnext<CR>
+nnoremap <S-Tab> :tabprev<CR>
+
+" map various JetBrains actions
+nmap <leader>d  <Action>(GotoDeclaration)
+nmap <leader>r  <Action>(ShowUsages)
+nmap <leader>h  <Action>(QuickImplementations)
+nmap <leader>sd <Action>(ShowErrorDescription)
+nmap <C-f>      <Action>(GotoFile)
+
+" toggle project tree
+map <C-e> :NERDTreeToggle<CR>

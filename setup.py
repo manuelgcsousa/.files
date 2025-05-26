@@ -39,13 +39,16 @@ for item in CONFIG_SRC_DIR.iterdir():
         print(f"Linked '{source}' ~> '{target}'")
 
 
-# link '$HOME/.zshrc'
-zshrc_source = DOTFILES_DIR / ".zshrc"
-zshrc_target = Path.home() / ".zshrc"
+# links for '$HOME'
+dotfiles = [".zshrc", ".ideavimrc"]
 
-print("Linking '.zshrc'...")
-if zshrc_target.exists() or zshrc_target.is_symlink():
-    print(f"Skipping existing '{zshrc_target}'")
-else:
-    zshrc_target.symlink_to(zshrc_source)
-    print(f"Linked '{zshrc_source}' ~> '{zshrc_target}'")
+for dotfile in dotfiles:
+    source = DOTFILES_DIR / dotfile
+    target = Path.home() / dotfile
+
+    print(f"Linking '{dotfile}'...")
+    if target.exists() or target.is_symlink():
+        print(f"Skipping existing '{target}'")
+    else:
+        target.symlink_to(source)
+        print(f"Linked '{source}' ~> '{target}'")

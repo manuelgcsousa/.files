@@ -1,9 +1,7 @@
 { config, pkgs, username, ... }:
 let
-  commonPkgs = import ./pkgs/common.nix { inherit pkgs; };
-
-  osPkgs = if pkgs.stdenv.isLinux then import ./pkgs/linux.nix { inherit pkgs; }
-           else import ./pkgs/darwin.nix { inherit pkgs; };
+  base = import ./pkgs/base.nix { inherit pkgs; };
+  extra = import ./pkgs/extra.nix { inherit pkgs; };
 in
 {
   nixpkgs = {
@@ -15,7 +13,7 @@ in
     username = "${username}";
     homeDirectory = if pkgs.stdenv.isLinux then "/home/${username}" else "/Users/${username}";
 
-    packages = commonPkgs ++ osPkgs;
+    packages = base ++ extra;
   };
 
   programs = {

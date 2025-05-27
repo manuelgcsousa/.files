@@ -3,6 +3,7 @@
 import platform
 from pathlib import Path
 
+
 # get running platform
 PLATFORM = platform.system()
 

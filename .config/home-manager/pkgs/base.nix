@@ -6,6 +6,7 @@ let
     fd
     fzf
     go
+    htop
     jq
     just
     macchina

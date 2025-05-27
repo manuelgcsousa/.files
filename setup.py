@@ -40,7 +40,7 @@ for item in CONFIG_SRC_DIR.iterdir():
 
 
 # links for '$HOME'
-dotfiles = [".zshrc", ".ideavimrc"]
+dotfiles = [".ideavimrc", ".vimrc", ".zshrc"]
 
 for dotfile in dotfiles:
     source = DOTFILES_DIR / dotfile

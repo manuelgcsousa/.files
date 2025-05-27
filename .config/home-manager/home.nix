@@ -22,13 +22,6 @@ in
     # let home-manager install and manage itself
     home-manager.enable = true;
 
-    bat = {
-      enable = true;
-      config = {
-        theme = "Visual Studio Dark+";
-      };
-    };
-
     neovim = {
       enable = true;
       viAlias = true;

@@ -1,6 +1,7 @@
 { pkgs }:
 with pkgs; [
   # base
+  bat
   fd
   fzf
   go

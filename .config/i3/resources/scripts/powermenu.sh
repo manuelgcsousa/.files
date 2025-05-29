@@ -6,23 +6,23 @@ selection="rofi -dmenu -i -p 'Run:' -l 4 -theme $HOME/.config/i3/resources/rofi/
 chosen=$(eval "$choices | $selection")
 
 case "$chosen" in
-    "  Power Off")
-        poweroff
-        ;;
+  "  Power Off")
+    poweroff
+    ;;
 
-    "  Reboot")
-        reboot
-        ;;
+  "  Reboot")
+    reboot
+    ;;
 
-    "  Lock")
-        i3lock -c 1C1C1C
-        ;;
+  "  Lock")
+    i3lock -c 1C1C1C
+    ;;
 
-    "󰍃  Logout")
-        i3-msg exit
-        ;;
+  "󰍃  Logout")
+    i3-msg exit
+    ;;
 
-    *)
-        exit 1
-        ;;
+  *)
+    exit 1
+    ;;
 esac

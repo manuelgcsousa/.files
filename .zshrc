@@ -122,6 +122,11 @@ function ppath() {
   echo $PATH | tr -s ':' '\n'
 }
 
+function mkcd() {
+  mkdir -p $@
+  cd $@
+}
+
 function mktar() {
   tar -cvzf "$1.tar.gz" "$1";
 }

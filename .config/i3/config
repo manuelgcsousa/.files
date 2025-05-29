@@ -2,9 +2,9 @@
 set $mod Mod4
 
 # define default apps commands
-set $TERMINAL      "WINIT_X11_SCALE_FACTOR=1 $HOME/.cargo/bin/alacritty"
+set $TERMINAL      "gnome-terminal"
 set $BAR           "i3blocks -c $HOME/.config/i3/resources/i3blocks/config"
-set $LAUNCHER      "rofi -show run -theme $HOME/.config/i3/resources/rofi/config.rasi"
+set $LAUNCHER      "rofi -show drun -theme $HOME/.config/i3/resources/rofi/config.rasi"
 set $NOTIFICATIONS "dunst -conf $HOME/.config/i3/resources/dunst/dunstrc"
 
 # define workspace names
@@ -39,7 +39,7 @@ workspace $MISC output primary
 # mouse+$mod to move floating windows
 font pango:Fira Sans Regular 11
 for_window [class="^.*"] border pixel 2
-gaps inner 5
+gaps inner 0
 floating_modifier $mod
 
 # status bar
@@ -75,11 +75,12 @@ mode "$mode_gaps" {
 }
 
 # startup applications
-# network-manager; notifications; displays; background
+# network-manager; notifications; display; background; key repeat
 exec --no-startup-id nm-applet &
 exec --no-startup-id $NOTIFICATIONS
-exec --no-startup-id "$HOME/.config/i3/resources/scripts/monitor-bootstrap laptop"
+exec --no-startup-id "$HOME/.config/i3/resources/scripts/display.sh"
 exec --no-startup-id xsetroot -solid "#333333"
+exec --no-startup-id xset r rate 300 35
 
 
 # =============================================================================
@@ -97,16 +98,13 @@ bindsym $mod+Shift+q kill
 # exit i3
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+e exec "$HOME/.config/i3/resources/scripts/powermenu"
+bindsym $mod+Shift+e exec "$HOME/.config/i3/resources/scripts/powermenu.sh"
 
 # program launcher
 bindsym $mod+space exec $LAUNCHER
 
-# monitor/display bootstrap
-bindsym $mod+Shift+b exec "$HOME/.config/i3/resources/scripts/monitor-bootstrap"
-
 # screenshot
-bindsym $mod+Shift+p exec "$HOME/.config/i3/resources/scripts/screenshot"
+bindsym $mod+Shift+p exec "$HOME/.config/i3/resources/scripts/screenshot.sh"
 
 # change focus
 bindsym $mod+Left focus left

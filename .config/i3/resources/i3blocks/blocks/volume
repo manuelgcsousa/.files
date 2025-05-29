@@ -2,28 +2,28 @@
 
 # mute when clicked
 if [[ "${BLOCK_BUTTON}" -eq 1 || "${BLOCK_BUTTON}" -eq 3 ]]; then
-    amixer -D pulse set 'Master' 1+ toggle 1>/dev/null
+  amixer -D pulse set 'Master' 1+ toggle 1>/dev/null
 fi
 
 # get volume
 statusLine=$(amixer get Master | tail -n 1)
 status=$(echo "${statusLine}" | grep -wo "on")
-volume=$(echo "${statusLine}" | awk -F ' ' '{print $4}' | tr -d '[]%')
+volume=$(echo "${statusLine}" | awk -F ' ' '{print $5}' | tr -d '[]%')
 
 if [[ "${status}" == "on" ]]; then
-    if [ "$volume" -gt "60" ]; then
-        icon="󰕾  "
-    elif [ "$volume" -gt "35" ]; then
-        icon="󰖀  "
-    else
-        icon="󰕿  "
-    fi
+  if [ "$volume" -gt "60" ]; then
+    icon="󰕾  "
+  elif [ "$volume" -gt "35" ]; then
+    icon="󰖀  "
+  else
+    icon="󰕿  "
+  fi
 
-    echo "${icon}${volume}%"
-    echo "${icon}${volume}%"
-    echo "#FFFFFF"
+  echo "${icon}${volume}%"
+  echo "${icon}${volume}%"
+  echo "#FFFFFF"
 else
-    echo "󰖁  MUTE"
-    echo "󰖁  MUTE"
-    echo "#FFF000"
+  echo "󰖁  MUTE"
+  echo "󰖁  MUTE"
+  echo "#FFF000"
 fi

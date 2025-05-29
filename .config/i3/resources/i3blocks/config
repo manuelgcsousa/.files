@@ -23,11 +23,6 @@ signal=2
 
 [separator]
 
-[battery]
-interval=5
-
-[separator]
-
 [datetime]
 interval=3
 

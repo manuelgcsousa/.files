@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 datetime=$(date '+%a, %b %d :: %H:%M')
 

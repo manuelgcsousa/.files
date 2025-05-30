@@ -17,6 +17,11 @@ signal=11
 
 [separator]
 
+[ip]
+interval=once
+
+[separator]
+
 [volume]
 interval=once
 signal=2

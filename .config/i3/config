@@ -38,7 +38,6 @@ workspace $MISC output primary
 # gaps \
 # mouse+$mod to move floating windows
 font pango:Fira Sans Regular 11
-for_window [class="^.*"] border pixel 2
 gaps inner 0
 floating_modifier $mod
 
@@ -46,7 +45,7 @@ floating_modifier $mod
 bar {
     status_command $BAR
     output primary
-    position top
+    position bottom
     colors {
         background #151515
     }

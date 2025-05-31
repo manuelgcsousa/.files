@@ -3,9 +3,9 @@
 choices="printf '  Power Off\n  Reboot\n  Lock\n󰍃  Logout'"
 selection="rofi -dmenu -i -p 'Run:' -l 4 -theme $HOME/.config/i3/resources/rofi/config.rasi"
 
-chosen=$(eval "$choices | $selection")
+choice=$(eval "$choices | $selection")
 
-case "$chosen" in
+case "$choice" in
   "  Power Off")
     poweroff
     ;;

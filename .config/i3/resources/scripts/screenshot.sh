@@ -1,9 +1,11 @@
 #!/bin/sh
 
-output="$HOME/Pictures/Screenshots/%Y-%m-%d-%T.png"
-chosen=$(printf "Selection\nScreen" | rofi -dmenu -i -p 'Screenshot:' -l 2 -theme $HOME/.config/i3/resources/rofi/config.rasi)
+timestamp=$(date +"%Y-%m-%d-%T")
+output="$HOME/Pictures/Screenshots/$timestamp.png"
 
-case "$chosen" in
+choice=$(printf "Selection\nScreen" | rofi -dmenu -i -p 'Screenshot:' -l 2 -theme $HOME/.config/i3/resources/rofi/config.rasi)
+
+case "$choice" in
   "Selection")
     scrot "$output" --select --line mode=edge || exit
     ;;
@@ -17,4 +19,4 @@ case "$chosen" in
     ;;
 esac
 
-notify-send "Screenshot taken."
+notify-send "Screenshot taken." "Saved to: \"$output\""

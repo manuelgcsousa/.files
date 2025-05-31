@@ -397,6 +397,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<Leader>r",  ":FzfLua lsp_references<CR>",               { noremap = true, silent = true })
       vim.keymap.set("n", "<Leader>d",  "<cmd>lua vim.lsp.buf.definition()<CR>",    { noremap = true, silent = true })
       vim.keymap.set("n", "<Leader>h",  "<cmd>lua vim.lsp.buf.hover()<CR>",         { noremap = true, silent = true })
+      vim.keymap.set("n", "<Leader>v",  "<cmd>lua vim.lsp.buf.rename()<CR>",        { noremap = true, silent = true })
       vim.keymap.set("n", "<Leader>sd", "<cmd>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
     end
   },

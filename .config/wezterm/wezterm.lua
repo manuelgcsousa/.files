@@ -39,16 +39,16 @@ config.colors = {
     "silver",
   },
 
-  -- brights = {
-  --   "grey",
-  --   "#ec5357",
-  --   "#c0e17d",
-  --   "#f9da6a",
-  --   "#49a4f8",
-  --   "#a47de9",
-  --   "#99faf2",
-  --   "white",
-  -- },
+  brights = {
+    "grey",
+    "#ec5357",
+    "#c0e17d",
+    "#f9da6a",
+    "#49a4f8",
+    "#a47de9",
+    "#99faf2",
+    "white",
+  },
 }
 
 config.font = wezterm.font(

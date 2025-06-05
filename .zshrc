@@ -110,8 +110,8 @@ alias \
 
 # other
 alias cat="bat -pp"
-alias icat="kitten icat"
 alias hms="home-manager switch"
+alias lf="ls --color=never | fzf"
 
 
 #
@@ -137,6 +137,11 @@ function untar() {
 
 function mkzip() {
   zip -r "$1.zip" "$1";
+}
+
+function unzipto() {
+  local output="${1%.zip}"
+  mkdir -p "$output" && unzip "$1" -d "$output"
 }
 
 function fcheckout() {

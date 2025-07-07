@@ -1,4 +1,6 @@
--- [[ PLUGINS (using 'lazy.nvim') ]]
+-- ============================================================================
+-- PLUGINS (using 'lazy.nvim')
+-- ============================================================================
 
 -- bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -217,11 +219,11 @@ require("lazy").setup({
   },
 
   -- [[ treesitter-context ]]
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
-    config = true,
-  },
+  -- {
+  --   "nvim-treesitter/nvim-treesitter-context",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   config = true,
+  -- },
 
   -- [[ gitsigns.nvim ]]
   {

@@ -43,9 +43,9 @@ copy() {
 }
 
 if [ $# -eq 1 ]; then
-  readlink -f "$1" | xargs echo -n | copy
+  readlink -f "$1" | perl -pe 'chomp if eof' | copy
 elif [ ! -t 0 ]; then
-  copy
+  perl -pe 'chomp if eof' | copy
 else
   paste
 fi

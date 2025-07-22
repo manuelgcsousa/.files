@@ -2,7 +2,7 @@
 set $mod Mod4
 
 # define default apps commands
-set $TERMINAL      "gnome-terminal"
+set $TERMINAL      "wezterm"
 set $BAR           "i3blocks -c $HOME/.config/i3/resources/i3blocks/config"
 set $LAUNCHER      "rofi -show drun -theme $HOME/.config/i3/resources/rofi/config.rasi"
 set $NOTIFICATIONS "dunst -conf $HOME/.config/i3/resources/dunst/dunstrc"
@@ -34,10 +34,11 @@ workspace $ws10 output secondary
 workspace $MISC output primary
 
 # i3 default font \
-# default border with no window title \
+# default border \
 # gaps \
 # mouse+$mod to move floating windows
 font pango:Fira Sans Regular 11
+for_window [class=.*] border normal 2
 gaps inner 0
 floating_modifier $mod
 
@@ -75,11 +76,12 @@ mode "$mode_gaps" {
 
 # startup applications
 # network-manager; notifications; display; background; key repeat
-exec --no-startup-id nm-applet &
+exec --no-startup-id nm-applet
 exec --no-startup-id $NOTIFICATIONS
 exec --no-startup-id "$HOME/.config/i3/resources/scripts/display.sh"
 exec --no-startup-id xsetroot -solid "#333333"
 exec --no-startup-id xset r rate 300 35
+exec --no-startup-id picom --config "$HOME/.config/i3/resources/picom/picom.conf"
 
 
 # =============================================================================

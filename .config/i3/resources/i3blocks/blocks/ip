@@ -1,7 +1,20 @@
 #!/bin/bash
 
-IP=$(ip -4 addr show scope global | awk '/inet / {print $2}' | cut -d/ -f1 | head -n1)
+# IP=$(ip -4 addr show scope global | awk '/inet / {print $2}' | cut -d/ -f1 | head -n1)
+# 
+# echo "  $IP"
+# echo "  $IP"
+# echo "#00FF00"
 
-echo "  $IP"
-echo "  $IP"
-echo "#00FF00"
+LOCAL=$(ip -4 addr show 'eno1' | awk '/inet / {print $2}' | cut -d'/' -f1)
+MONDEGO_VPN=$(ip -4 addr show 'mondego' | awk '/inet / {print $2}' | cut -d'/' -f1)
+
+if [[ -n "$MONDEGO_VPN" ]]; then
+  echo "  $LOCAL /   $MONDEGO_VPN"
+  echo "  $LOCAL /   $MONDEGO_VPN"
+  echo "#00FF00"
+elif [[ -n "$LOCAL" ]]; then
+  echo "  $LOCAL"
+  echo "  $LOCAL"
+  echo "#00FF00"
+fi

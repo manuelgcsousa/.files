@@ -3,7 +3,7 @@
 #
 
 export TERM="xterm-256color"
-export TERMINAL="kitty"
+export TERMINAL="wezterm"
 export EDITOR="vim"
 export LANG=pt_PT.UTF-8
 export LC_MESSAGES=en_US.UTF-8
@@ -11,9 +11,6 @@ export LC_MESSAGES=en_US.UTF-8
 # go's workspace
 export GOPATH="$HOME/.local/share/go"
 export GOBIN="$GOPATH/bin"
-
-# dotnet
-export DOTNET_ROOT="/usr/local/share/dotnet"
 
 # Nix
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
@@ -40,13 +37,13 @@ pathadd "/usr/local/go/bin"
 pathadd "$GOPATH"
 pathadd "$GOBIN"
 pathadd "$HOME/.cargo/bin"
-pathadd "$HOME/.dotnet/tools"
 
 # pyenv
-eval "$(pyenv init -)"
+pathadd "$HOME/.pyenv"
+command -v pyenv >/dev/null && eval "$(pyenv init -)"
 
 # fzf key bindings
-source <(fzf --zsh)
+command -v fzf >/dev/null && source <(fzf --zsh)
 
 
 #

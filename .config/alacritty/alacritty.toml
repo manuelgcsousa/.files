@@ -2,7 +2,7 @@
 WINIT_X11_SCALE_FACTOR = "1"
 
 [font]
-size = 13.5
+size = 16.5
 
 [font.normal]
 family = "IosevkaTerm Nerd Font"
@@ -10,7 +10,7 @@ style = "Regular"
 
 [font.offset]
 x = 0
-y = 4
+y = 6
 
 [window]
 dynamic_title = true

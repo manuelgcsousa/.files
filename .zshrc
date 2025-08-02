@@ -3,20 +3,10 @@
 #
 
 export TERM="xterm-256color"
-export TERMINAL="wezterm"
+export TERMINAL="alacritty"
 export EDITOR="vim"
 export LANG=pt_PT.UTF-8
 export LC_MESSAGES=en_US.UTF-8
-
-# go's workspace
-export GOPATH="$HOME/.local/share/go"
-export GOBIN="$GOPATH/bin"
-
-# Nix
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
-# End Nix
 
 
 #
@@ -33,9 +23,6 @@ pathadd "/opt/homebrew/bin"
 pathadd "/opt/homebrew/sbin"
 pathadd "$HOME/.local/bin"
 pathadd "$HOME/.scripts"
-pathadd "/usr/local/go/bin"
-pathadd "$GOPATH"
-pathadd "$GOBIN"
 pathadd "$HOME/.cargo/bin"
 
 # pyenv
@@ -106,8 +93,6 @@ alias \
   grep="grep --color=auto"
 
 # other
-alias cat="bat -pp"
-alias hms="home-manager switch"
 alias lf="ls --color=never | fzf"
 
 

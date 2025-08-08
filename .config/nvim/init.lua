@@ -1,4 +1,4 @@
--- NeoVim Configuration
+-- Neovim Configuration
 -- Author: manl
 
 require("core")

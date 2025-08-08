@@ -21,18 +21,27 @@ vim.opt.rtp:prepend(lazypath)
 
 -- setup
 require("lazy").setup({
-  { import = "plugins.colorscheme" },
-  { import = "plugins.lualine" },
-  { import = "plugins.alpha" },
-  { import = "plugins.fzf" },
-  { import = "plugins.tree" },
-  { import = "plugins.treesitter" },
-  { import = "plugins.gitsigns" },
-  { import = "plugins.conform" },
-  { import = "plugins.completion" },
-  { import = "plugins.lsp" },
+  spec = {
+    { import = "plugins.colorscheme" },
+    { import = "plugins.lualine" },
+    { import = "plugins.alpha" },
+    { import = "plugins.fzf" },
+    { import = "plugins.tree" },
+    { import = "plugins.treesitter" },
+    { import = "plugins.gitsigns" },
+    { import = "plugins.conform" },
+    { import = "plugins.completion" },
+    { import = "plugins.lsp" },
 
-  { "akinsho/git-conflict.nvim", version = "*", config = true },
-  { "tpope/vim-surround", lazy = false },
-  { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+    { "akinsho/git-conflict.nvim", version = "*", config = true },
+    { "tpope/vim-surround", lazy = false },
+    { "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+  },
+
+  ui = {
+    size = { width = 0.8, height = 0.8 },
+    wrap = true,
+    border = "rounded",
+    backdrop = 100,
+  },
 })

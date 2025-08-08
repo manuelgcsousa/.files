@@ -3,7 +3,7 @@
 #
 
 export TERM="xterm-256color"
-export TERMINAL="alacritty"
+export TERMINAL="wezterm"
 export EDITOR="vim"
 export LANG=pt_PT.UTF-8
 export LC_MESSAGES=en_US.UTF-8
@@ -93,6 +93,8 @@ alias \
   grep="grep --color=auto"
 
 # other
+alias cat="bat -pp"
+alias vim="nvim"
 alias lf="ls --color=never | fzf"
 
 

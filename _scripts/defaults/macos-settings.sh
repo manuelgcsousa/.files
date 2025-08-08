@@ -36,7 +36,7 @@ defaults write com.apple.dock expose-group-apps -bool true
 
 # key repeat speed
 defaults write NSGlobalDomain KeyRepeat -int 2
-defaults write NSGlobalDomain InitialKeyRepeat -int 30
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # restart apps
 killall "Finder" &> /dev/null

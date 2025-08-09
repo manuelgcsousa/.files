@@ -1,11 +1,9 @@
 # mod key (super)
 set $mod Mod4
 
-# define default apps commands
+# define main apps commands
 set $TERMINAL      "wezterm"
 set $BAR           "i3blocks -c $HOME/.config/i3/resources/i3blocks/config"
-set $LAUNCHER      "rofi -show drun -theme $HOME/.config/i3/resources/rofi/config.rasi"
-set $NOTIFICATIONS "dunst -conf $HOME/.config/i3/resources/dunst/dunstrc"
 
 # define workspace names
 set $ws1 "1"
@@ -75,11 +73,11 @@ mode "$mode_gaps" {
 }
 
 # startup applications
-# network-manager; notifications; display; background; key repeat
+# network-manager; notifications; display; wallpaper; key repeat; compositor
 exec --no-startup-id nm-applet
-exec --no-startup-id $NOTIFICATIONS
+exec --no-startup-id "dunst -conf $HOME/.config/i3/resources/dunst/dunstrc"
 exec --no-startup-id "$HOME/.config/i3/resources/scripts/display.sh"
-exec --no-startup-id xsetroot -solid "#333333"
+exec --no-startup-id "$HOME/.fehbg"
 exec --no-startup-id xset r rate 280 35
 exec --no-startup-id picom --config "$HOME/.config/i3/resources/picom/picom.conf"
 
@@ -102,7 +100,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "$HOME/.config/i3/resources/scripts/powermenu.sh"
 
 # program launcher
-bindsym $mod+space exec $LAUNCHER
+bindsym $mod+space exec "rofi -show drun -theme $HOME/.config/i3/resources/rofi/apps.rasi"
 
 # screenshot
 bindsym $mod+Shift+p exec "$HOME/.config/i3/resources/scripts/screenshot.sh"

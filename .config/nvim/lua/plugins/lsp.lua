@@ -10,6 +10,11 @@ return {
 
     -- server configuration
     local servers = {
+      ["lua_ls"] = {
+        settings = {
+          Lua = { workspace = { library = { vim.env.VIMRUNTIME } } },
+        },
+      },
       ["pyright"] = {
         settings = {
           python = {
@@ -20,12 +25,7 @@ return {
           },
         },
       },
-      ["lua_ls"] = {
-        settings = {
-          Lua = { workspace = { library = { vim.env.VIMRUNTIME } } },
-        },
-      },
-      ["ts_ls"] = {},
+      ["gopls"] = {},
     }
     for server, config in pairs(servers) do
       lsp[server].setup(config)

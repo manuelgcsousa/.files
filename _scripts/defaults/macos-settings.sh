@@ -4,14 +4,14 @@
 # Settings
 #
 
-# move windows by holding 'ctrl+cmd' and dragging any part of the window
-defaults write -g NSWindowShouldDragOnGesture -bool true
-
-# show path bar in Finder
+# change Finder view style to "list view" \
+# show path bar in Finder \
+# display full POSIX path as Finder window title \
+# remove items from Trash after 30 days
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 defaults write com.apple.finder ShowPathbar -bool true
-
-# display full POSIX path as Finder window title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 
 # enable auto-hiding \
 # remove the auto-hiding Dock delay \
@@ -34,9 +34,15 @@ defaults write com.apple.dock show-recents -bool false
 # group windows by application
 defaults write com.apple.dock expose-group-apps -bool true
 
+# move windows by holding 'ctrl+cmd' and dragging any part of the window
+defaults write -g NSWindowShouldDragOnGesture -bool true
+
+# show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
 # key repeat speed
 defaults write NSGlobalDomain KeyRepeat -int 2
-defaults write NSGlobalDomain InitialKeyRepeat -int 30
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # restart apps
 killall "Finder" &> /dev/null

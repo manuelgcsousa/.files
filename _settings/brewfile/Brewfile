@@ -1,19 +1,13 @@
 # taps
-tap "homebrew/bundle"
 tap "nikitabobko/tap"
-
-# brews
-brew "stow"
 
 # casks
 cask "aerospace"
 cask "brave-browser"
 cask "dbeaver-community"
-cask "librewolf"
 cask "hiddenbar"
-cask "kitty"
+cask "linearmouse"
 cask "raycast"
-cask "scroll-reverser"
 cask "signal"
-cask "slack"
+cask "wezterm"
 cask "zed"

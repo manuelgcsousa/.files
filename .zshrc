@@ -4,7 +4,7 @@
 
 export TERM="xterm-256color"
 export TERMINAL="wezterm"
-export EDITOR="vim"
+export EDITOR="nvim"
 export LANG=pt_PT.UTF-8
 export LC_MESSAGES=en_US.UTF-8
 
@@ -107,6 +107,7 @@ alias \
 
 # other
 alias cat="bat -pp"
+alias vim="nvim"
 alias hms="home-manager switch"
 alias lf="ls --color=never | fzf"
 

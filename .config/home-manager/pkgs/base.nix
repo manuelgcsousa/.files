@@ -10,7 +10,7 @@ let
     jq
     just
     macchina
-    nodejs_23
+    nodejs_24
     pyenv
     ripgrep
     tabiew

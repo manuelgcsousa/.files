@@ -56,6 +56,14 @@ config.front_end = "WebGpu"
 
 
 --
+-- MISC
+--
+
+config.audible_bell = "Disabled"
+config.max_fps = 120
+
+
+--
 -- MAPPINGS
 --
 

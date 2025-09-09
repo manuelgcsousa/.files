@@ -5,7 +5,7 @@
 vim.g.mapleader = ","
 
 -- quick save // force buffer quit // jump to previous buffer
-vim.keymap.set("n", "<Leader>w", ":w<CR><Space><Left>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>w", ":w<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>Q", ":bdelete!<CR>",       { noremap = true, silent = true })
 vim.keymap.set("n", "<Leader>b", ":b#<CR>",             { noremap = true, silent = true })
 

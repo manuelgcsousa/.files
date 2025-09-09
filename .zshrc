@@ -37,6 +37,7 @@ pathadd "/usr/local/go/bin"
 pathadd "$GOPATH"
 pathadd "$GOBIN"
 pathadd "$HOME/.cargo/bin"
+pathadd "$(npm prefix -g)/bin"
 
 # pyenv
 pathadd "$HOME/.pyenv"

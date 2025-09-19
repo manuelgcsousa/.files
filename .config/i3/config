@@ -2,8 +2,8 @@
 set $mod Mod4
 
 # define main apps commands
-set $TERMINAL      "wezterm"
-set $BAR           "i3blocks -c $HOME/.config/i3/resources/i3blocks/config"
+set $TERMINAL "wezterm"
+set $BAR      "i3blocks -c $HOME/.config/i3/resources/i3blocks/config"
 
 # define workspace names
 set $ws1 "1"
@@ -32,13 +32,19 @@ workspace $ws10 output secondary
 workspace $MISC output primary
 
 # i3 default font \
-# default border \
+# window border size \
+# window title \
 # gaps \
 # mouse+$mod to move floating windows
 font pango:Fira Sans Regular 11
 for_window [class=.*] border normal 2
+for_window [class=".*"] title_format "[ %title ]"
 gaps inner 0
 floating_modifier $mod
+
+# colors
+# <class>       <border>  <backgr.>  <text>  <indicator>  <child_border>
+client.focused  #4C7899   #285577    #FFFFFF #2E9EF4      #4C7899
 
 # status bar
 bar {
@@ -62,7 +68,7 @@ mode "resize" {
 }
 
 # gaps mode
-set $mode_gaps Gaps: + | - | 0
+set $mode_gaps gaps ( + | - | 0 )
 mode "$mode_gaps" {
     bindsym plus  gaps inner current plus 5
     bindsym minus gaps inner current minus 5
@@ -168,8 +174,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id amixer set 'Master' 5%- 1>/dev
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse set 'Master' 1+ toggle 1>/dev/null && $refresh_i3status
 
 # laptop brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id brillo -q -A 2
-bindsym XF86MonBrightnessDown exec --no-startup-id brillo -q -U 2
+# bindsym XF86MonBrightnessUp exec --no-startup-id brillo -q -A 2
+# bindsym XF86MonBrightnessDown exec --no-startup-id brillo -q -U 2
 
 # caps lock signal
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks

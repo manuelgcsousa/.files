@@ -3,13 +3,13 @@ let
   common = with pkgs; [
     # base
     bat
+    fastfetch
     fd
     fzf
     go
     htop
     jq
     just
-    macchina
     nodejs_24
     pyenv
     ripgrep
@@ -25,14 +25,9 @@ let
     pyright
     ruff
     terraform-ls
-
-    # fonts
-    nerd-fonts.iosevka-term
   ];
 
-  linux = with pkgs; [
-    wl-clipboard
-  ];
+  linux = with pkgs; [ ];
 
   darwin = with pkgs; [
     jankyborders

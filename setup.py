@@ -7,12 +7,6 @@ from pathlib import Path
 # get running platform
 PLATFORM = platform.system()
 
-# specific platform skips
-PLATFORM_SKIPS = {
-    "Linux": {"aerospace"},
-    "Darwin": {"i3"}
-}
-
 # path definitions
 DOTFILES_DIR = Path(__file__).resolve().parent
 CONFIG_DIR = Path.home() / ".config"
@@ -26,10 +20,6 @@ CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 for item in CONFIG_SRC_DIR.iterdir():
     print(f"Linking '{item.name}'...")
 
-    if item.name in PLATFORM_SKIPS.get(PLATFORM, set()):
-        print(f"Skipping '{item.name}' on {PLATFORM}...")
-        continue
-
     source = item
     target = CONFIG_DIR / item.name
 
@@ -38,6 +28,7 @@ for item in CONFIG_SRC_DIR.iterdir():
     else:
         target.symlink_to(source)
         print(f"Linked '{source}' ~> '{target}'")
+    print()
 
 
 # links for '$HOME'
@@ -53,3 +44,4 @@ for dotfile in dotfiles:
     else:
         target.symlink_to(source)
         print(f"Linked '{source}' ~> '{target}'")
+    print()

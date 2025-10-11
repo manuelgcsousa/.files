@@ -1,0 +1,221 @@
+# =============================================================================
+# defaults
+# =============================================================================
+
+set $USER    "manl"
+set $LAPTOP  "eDP-1"
+set $MONITOR "Dell Inc. DELL G2422HS 1BR5XJ3"
+
+# mod key (super)
+set $mod Mod4
+
+# default font \
+# window border size \
+# gaps \
+# mouse+$mod to move floating windows
+font pango:Fira Sans Regular 10
+default_border pixel 2
+gaps inner 10
+floating_modifier $mod
+
+# colors
+# <class>       <border>  <backgr.>  <text>  <indicator>  <child_border>
+client.focused  #487495   #285577    #FFFFFF #2E9EF4      #4C7899
+
+# status bar
+bar {
+    swaybar_command "/home/$USER/.config/sway/scripts/waybar.sh"
+}
+
+# resize
+mode "resize" {
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# gaps
+set $mode_gaps gaps ( + | - | 0 )
+mode "$mode_gaps" {
+    bindsym plus  gaps inner current plus 5
+    bindsym minus gaps inner current minus 5
+    bindsym 0     gaps inner current set 0
+
+    bindsym Return mode "$mode_gaps"
+    bindsym Escape mode "default"
+}
+
+# GTK settings
+# set $gnome-schema org.gnome.desktop.interface
+# exec_always {
+#     gsettings set $gnome-schema gtk-theme    'Mint-Y-Dark-Blue'
+#     gsettings set $gnome-schema icon-theme   'Mint-Y-Blue'
+#     gsettings set $gnome-schema cursor-theme 'Bibata-Modern-Classic'
+#     gsettings set $gnome-schema font-name    'Fira Sans 10'
+# }
+
+
+
+# =============================================================================
+# startup
+# =============================================================================
+
+# outputs
+output $LAPTOP {
+    mode 1920x1200@60.002Hz
+    pos 1920 1200
+    transform normal
+    scale 1.25
+    scale_filter smart
+    adaptive_sync off
+    dpms on
+}
+output $MONITOR {
+    mode  1920x1080@164.997Hz
+    pos 3456 1080
+    transform normal
+    scale 1.0
+    scale_filter nearest
+    adaptive_sync off
+    dpms on
+}
+
+# wallpaper
+# output * bg "/home/$USER/Pictures/Wallpapers/mint.png" fill
+output * bg #192231 solid_color
+
+# always focus on external monitor
+focus output $MONITOR
+
+# inputs
+input * {
+    xkb_layout "pt"
+    repeat_delay 280
+    repeat_rate 35
+}
+input "type:touchpad" {
+    dwt enabled
+    tap disabled
+    natural_scroll enabled
+    pointer_accel 0.0
+    scroll_factor 0.25
+}
+input "2:10:TPPS/2_Elan_TrackPoint" {
+    pointer_accel -0.30
+    scroll_factor 0.25
+}
+
+# systemd user environment
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+# ensure audio services are running
+exec systemctl --user start pipewire pipewire-pulse.service pipewire-pulse.socket pipewire.socket wireplumber.service
+
+# handle open/close laptop lid
+bindswitch --reload --locked lid:on output $LAPTOP disable
+bindswitch --reload --locked lid:off output $LAPTOP enable
+
+# launcher service; notifications
+exec --no-startup-id "walker --gapplication-service &"
+exec --no-startup-id "dunst"
+
+
+
+# =============================================================================
+# keychords
+# =============================================================================
+
+# start a terminal
+bindsym $mod+Return exec wezterm
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# reload the configuration file
+# exit
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+e exec --no-startup-id "/home/$USER/.config/sway/scripts/powermenu.sh"
+
+# program launcher
+bindsym $mod+space exec --no-startup-id "walker"
+
+# screenshot
+bindsym $mod+Shift+s exec --no-startup-id "/home/$USER/.config/sway/scripts/screenshot.sh"
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# swap windows
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+
+# enter resize mode \
+# enter gaps mode
+bindsym $mod+r mode "resize"
+bindsym $mod+g mode "$mode_gaps"
+
+# split in horizontal orientation \
+# split in vertical orientation \
+# enter fullscreen mode for the focused container \
+# use tabbed layout \
+# toggle tiling/floating
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+bindsym $mod+t layout tabbed
+bindsym $mod+Shift+space floating toggle
+
+# switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+m workspace "MISC"
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+m move container to workspace "MISC"
+
+# volume keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set 'Master' 5%+ 1>/dev/null
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set 'Master' 5%- 1>/dev/null
+bindsym XF86AudioMute exec --no-startup-id amixer set 'Master' toggle 1>/dev/null
+
+# laptop brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
+
+# PrintScreen
+bindsym Print \
+    exec --no-startup-id 'grim - | wl-copy -t image/png && notify-send "Screenshot copied to clipboard."'
+bindsym XF86Launch2 \
+    exec --no-startup-id 'grim -g "$(slurp)" - | wl-copy -t image/png && notify-send "Screenshot copied to clipboard."'
+
+# disable PgUp and PgDown
+bindsym Prior nop
+bindsym Next nop

@@ -1,0 +1,122 @@
+terminal_title_flag = ""
+locale = ""
+close_when_open = false
+theme = "mytheme"
+theme_location = ["~/.config/walker/themes/"]
+monitor = ""
+hotreload_theme = true
+as_window = false
+timeout = 0
+disable_click_to_close = false
+force_keyboard_focus = true
+plugin_location = []
+js_runtime = "node"
+
+[keys]
+accept_typeahead = ["tab"]
+trigger_labels = "lalt"
+next = ["down"]
+prev = ["up"]
+close = ["esc"]
+remove_from_history = ["shift backspace"]
+resume_query = ["ctrl r"]
+toggle_exact_search = ["ctrl m"]
+
+[keys.activation_modifiers]
+keep_open = "shift"
+alternate = "alt"
+
+[events]
+on_activate = ""
+on_selection = ""
+on_exit = ""
+on_launch = ""
+on_query_change = ""
+
+[list]
+max_entries = 200
+cycle = true
+
+[search]
+argument_delimiter = "#"
+placeholder = "Search..."
+delay = 0
+resume_last_query = false
+
+[builtins.applications]
+weight = 5
+name = "applications"
+placeholder = "Applications"
+prioritize_new = true
+hide_actions_with_empty_query = true
+context_aware = true
+refresh = true
+show_sub_when_single = true
+show_icon_when_single = true
+show_generic = true
+history = true
+icon = "applications-other"
+
+[builtins.applications.actions]
+enabled = false
+
+[builtins.bookmarks]
+hidden = true
+
+[builtins.xdph_picker]
+hidden = true
+
+[builtins.ai]
+hidden = true
+
+[builtins.calc]
+require_number = true
+weight = 5
+name = "calc"
+icon = "accessories-calculator"
+placeholder = "Calculator"
+min_chars = 4
+
+[builtins.windows]
+hidden = true
+
+[builtins.clipboard]
+hidden = true
+
+[builtins.commands]
+hidden = true
+
+[builtins.custom_commands]
+hidden = true
+
+[builtins.emojis]
+hidden = true
+
+[builtins.symbols]
+hidden = true
+
+[builtins.finder]
+hidden = false
+use_fd = true
+cmd_alt = "xdg-open $(dirname ~/%RESULT%)"
+weight = 5
+icon = "file"
+name = "Finder"
+prefix = "."
+
+[builtins.runner]
+shell_config = ""
+switcher_only = true
+hidden = true
+
+[builtins.ssh]
+hidden = true
+
+[builtins.switcher]
+hidden = true
+
+[builtins.websearch]
+hidden = true
+
+[builtins.translation]
+hidden = true

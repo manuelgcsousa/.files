@@ -13,6 +13,7 @@
     let
       username = "manl";
       system = "x86_64-linux";
+      enableSway = true;
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
@@ -23,6 +24,7 @@
 
         extraSpecialArgs = {
           inherit username;
+          inherit enableSway;
         };
       };
     };

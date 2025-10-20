@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # Options
-POWEROFF="   Power Off"
-REBOOT="   Reboot"
-LOCK="   Lock"
-LOGOUT="󰍃   Logout"
+POWEROFF="  Power Off"
+REBOOT="  Reboot"
+LOCK="  Lock"
+LOGOUT="󰍃  Logout"
 
 # Build choices string
 choices=$(printf "%s\n%s\n%s\n%s\n%s" \
@@ -14,7 +14,7 @@ choices=$(printf "%s\n%s\n%s\n%s\n%s" \
   "$LOGOUT")
 
 # Get choice
-choice=$(printf "%s" "$choices" | walker --dmenu -p 'Run...')
+choice=$(printf "%s" "$choices" | fuzzel --lines 4 --width 30 --dmenu --prompt "Run: ")
 
 case "$choice" in
   "$POWEROFF")

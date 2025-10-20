@@ -3,7 +3,7 @@
 timestamp=$(date +"%Y-%m-%d-%T")
 output="$HOME/Pictures/Screenshots/$timestamp.png"
 
-choice=$(printf "Selection\nScreen" | walker --dmenu -p "Screenshot...")
+choice=$(printf "Selection\nScreen" | fuzzel --lines 2 --width 40 --dmenu --prompt "Run: ")
 
 case "$choice" in
   "Selection")

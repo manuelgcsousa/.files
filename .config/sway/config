@@ -50,13 +50,14 @@ mode "$mode_gaps" {
 }
 
 # GTK settings
-# set $gnome-schema org.gnome.desktop.interface
-# exec_always {
-#     gsettings set $gnome-schema gtk-theme    'Mint-Y-Dark-Blue'
-#     gsettings set $gnome-schema icon-theme   'Mint-Y-Blue'
-#     gsettings set $gnome-schema cursor-theme 'Bibata-Modern-Classic'
-#     gsettings set $gnome-schema font-name    'Fira Sans 10'
-# }
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+    gsettings set $gnome-schema gtk-theme    'Mint-Y-Dark-Blue'
+    gsettings set $gnome-schema icon-theme   'Mint-Y-Blue'
+    gsettings set $gnome-schema cursor-theme 'Bibata-Modern-Classic'
+    gsettings set $gnome-schema font-name    'Fira Sans 10'
+}
+
 
 
 
@@ -85,7 +86,6 @@ output $MONITOR {
 }
 
 # wallpaper
-# output * bg "/home/$USER/Pictures/Wallpapers/mint.png" fill
 output * bg #192231 solid_color
 
 # always focus on external monitor
@@ -120,8 +120,7 @@ exec systemctl --user start pipewire pipewire-pulse.service pipewire-pulse.socke
 bindswitch --reload --locked lid:on output $LAPTOP disable
 bindswitch --reload --locked lid:off output $LAPTOP enable
 
-# launcher service; notifications
-exec --no-startup-id "walker --gapplication-service &"
+# notifications
 exec --no-startup-id "dunst"
 
 
@@ -142,7 +141,7 @@ bindsym $mod+Shift+r reload
 bindsym $mod+Shift+e exec --no-startup-id "/home/$USER/.config/sway/scripts/powermenu.sh"
 
 # program launcher
-bindsym $mod+space exec --no-startup-id "walker"
+bindsym $mod+space exec --no-startup-id "fuzzel"
 
 # screenshot
 bindsym $mod+Shift+s exec --no-startup-id "/home/$USER/.config/sway/scripts/screenshot.sh"

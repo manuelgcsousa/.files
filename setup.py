@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
-import platform
 from pathlib import Path
 
-
-# get running platform
-PLATFORM = platform.system()
 
 # path definitions
 DOTFILES_DIR = Path(__file__).resolve().parent

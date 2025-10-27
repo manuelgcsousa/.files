@@ -4,9 +4,9 @@ from pathlib import Path
 
 
 # path definitions
-DOTFILES_DIR = Path(__file__).resolve().parent
+DOTFILES_DIR = Path(__file__).resolve().parent / "home"
+CONFIG_SRC_DIR = DOTFILES_DIR / ".config"
 CONFIG_DIR = Path.home() / ".config"
-CONFIG_SRC_DIR = DOTFILES_DIR / "home" / ".config"
 
 
 def link_config_dotfiles():

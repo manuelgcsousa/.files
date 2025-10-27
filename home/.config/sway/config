@@ -50,12 +50,14 @@ mode "$mode_gaps" {
 }
 
 # GTK settings
-set $gnome-schema org.gnome.desktop.interface
+set $gnome-interface org.gnome.desktop.interface
+set $gnome-preferences org.gnome.desktop.wm.preferences
 exec_always {
-    gsettings set $gnome-schema gtk-theme    'Mint-Y-Dark-Blue'
-    gsettings set $gnome-schema icon-theme   'Mint-Y-Blue'
-    gsettings set $gnome-schema cursor-theme 'Bibata-Modern-Classic'
-    gsettings set $gnome-schema font-name    'Fira Sans 10'
+    gsettings set $gnome-interface   gtk-theme     'Mint-Y-Dark-Blue'
+    gsettings set $gnome-interface   icon-theme    'Mint-Y-Blue'
+    gsettings set $gnome-interface   cursor-theme  'Bibata-Modern-Classic'
+    gsettings set $gnome-interface   font-name     'Fira Sans 10'
+    gsettings set $gnome-preferences button-layout ':close'
 }
 
 

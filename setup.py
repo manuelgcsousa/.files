@@ -6,38 +6,40 @@ from pathlib import Path
 # path definitions
 DOTFILES_DIR = Path(__file__).resolve().parent
 CONFIG_DIR = Path.home() / ".config"
-CONFIG_SRC_DIR = DOTFILES_DIR / ".config"
-
-# ensure '$HOME/.config' exists
-CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+CONFIG_SRC_DIR = DOTFILES_DIR / "home" / ".config"
 
 
-# links for '$HOME/.config/...'
-for item in CONFIG_SRC_DIR.iterdir():
-    print(f"Linking '{item.name}'...")
+def link_config_dotfiles():
+    # ensure '$HOME/.config' exists
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 
-    source = item
-    target = CONFIG_DIR / item.name
+    # links for '$HOME/.config'
+    for item in sorted(CONFIG_SRC_DIR.iterdir()):
+        source = item
+        target = CONFIG_DIR / item.name
 
-    if target.exists() or target.is_symlink():
-        print(f"Skipping existing '{target}'")
-    else:
-        target.symlink_to(source)
-        print(f"Linked '{source}' ~> '{target}'")
-    print()
+        if target.exists() or target.is_symlink():
+            print(f"Skipping existing '{target}'")
+        else:
+            target.symlink_to(source)
+            print(f"Linked '{source}' ~> '{target}'")
 
 
-# links for '$HOME'
-dotfiles = [".ideavimrc", ".vimrc", ".zshrc"]
+def link_home_dotfiles():
+    dotfiles = [".ideavimrc", ".vimrc", ".zshrc"]
 
-for dotfile in dotfiles:
-    source = DOTFILES_DIR / dotfile
-    target = Path.home() / dotfile
+    # links for '$HOME'
+    for dotfile in dotfiles:
+        source = DOTFILES_DIR / dotfile
+        target = Path.home() / dotfile
 
-    print(f"Linking '{dotfile}'...")
-    if target.exists() or target.is_symlink():
-        print(f"Skipping existing '{target}'")
-    else:
-        target.symlink_to(source)
-        print(f"Linked '{source}' ~> '{target}'")
-    print()
+        if target.exists() or target.is_symlink():
+            print(f"Skipping existing '{target}'")
+        else:
+            target.symlink_to(source)
+            print(f"Linked '{source}' ~> '{target}'")
+
+
+if __name__ == "__main__":
+    link_config_dotfiles()
+    link_home_dotfiles()

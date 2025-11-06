@@ -10,4 +10,5 @@ with pkgs; [
   fuzzel         # launcher
   nautilus       # gnome GUI file manager
   nwg-displays   # manual output display manager
+  hyprpicker     # color picker
 ]

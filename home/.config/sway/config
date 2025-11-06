@@ -14,8 +14,6 @@ set $mod Mod4
 # gaps \
 # mouse+$mod to move floating windows
 font pango:Fira Sans Regular 10
-default_border pixel 2
-gaps inner 10
 floating_modifier $mod
 
 # colors

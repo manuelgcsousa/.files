@@ -2,6 +2,7 @@
 let
   common = with pkgs; [
     # base
+    ansible
     bat
     fastfetch
     fd
@@ -13,6 +14,7 @@ let
     nodejs_24
     pyenv
     ripgrep
+    sshpass
     tabiew
     tmux
     tree

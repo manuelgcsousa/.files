@@ -14,11 +14,13 @@ set $mod Mod4
 # gaps \
 # mouse+$mod to move floating windows
 font pango:Fira Sans Regular 10
+default_border pixel 2
+gaps inner 10
 floating_modifier $mod
 
 # colors
 # <class>       <border>  <backgr.>  <text>  <indicator>  <child_border>
-client.focused  #487495   #285577    #FFFFFF #2E9EF4      #4C7899
+client.focused  #487495   #285577    #FFFFFF #4C7899      #4C7899
 
 # status bar
 bar {
@@ -185,7 +187,7 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
-bindsym $mod+m workspace "MISC"
+bindsym $mod+m workspace "M"
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number 1
@@ -198,7 +200,7 @@ bindsym $mod+Shift+7 move container to workspace number 7
 bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
-bindsym $mod+Shift+m move container to workspace "MISC"
+bindsym $mod+Shift+m move container to workspace "M"
 
 # volume keys
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set 'Master' 5%+ 1>/dev/null

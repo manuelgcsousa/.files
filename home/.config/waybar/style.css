@@ -1,89 +1,76 @@
 * {
-  border: none;
-  border-radius: 0;
-  min-height: 0;
-  font-family: Fira Sans;
+  font-family: "Fira Sans";
   font-size: 14px;
 }
 
+#image {
+  padding: 5px;
+  padding-left: 8px;
+}
+
+#window {
+  padding: 0 6px;
+  color: #d8d8d8;
+}
 window#waybar {
   background-color: #0F0F0F;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
 
-window#waybar.hidden {
-  opacity: 0.5;
-}
-
-#workspaces {
-  background-color: transparent;
-}
-
 #workspaces button {
-  all: initial;
-  min-width: 0;
-  border: 1px solid #333233;
-  padding: 0px 5px;
-  margin: 0px 0px;
-  border-radius: 0px;
-  background-color: #222222;
+  padding: 0 0px;
   color: #888888;
+  background: transparent;
 }
-
 #workspaces button.focused {
   color: #ffffff;
-  background-color: #285477;
-  border: 1px solid #4c7898;
+  font-weight: bold;
 }
-
 #workspaces button.urgent {
   color: #ffffff;
-  background-color: #900000;
-  border: 1px solid #2f343a;
 }
 
-#mode {
-  color: #ffffff;
-  background-color: #900000;
-  padding: 0px 5px;
+#custom-sep,
+#network,
+#battery,
+#pulseaudio,
+#clock,
+#tray {
+  padding: 0 6px;
+  color: #d8d8d8;
+}
+
+#custom-sep {
+  color: #444b6a;
 }
 
 #network {
-  margin-right: 12px;
-  margin-left: 10px;
+  color: #d8d8d8;
 }
-
-#pulseaudio {
-  margin-left: 15px;
+#network.disconnected {
+  color: #fff000;
 }
-
-#pulseaudio.muted {
-  color: #fff000
+#network.disabled {
+  color: #ff0000;
 }
 
 #battery {
-  margin-left: 10px;
+  color: #d8d8d8;
 }
 
-#custom-datetime {
-  margin-left: 15px;
-  margin-right: 15px;
+#pulseaudio {
+  color: #d8d8d8;
+}
+#pulseaudio.muted {
+  color: #fff000;
 }
 
 #custom-expand-icon {
-  margin-right: 12px;
+  padding: 0 6px;
+  padding-right: 8px;
+  color: #d8d8d8;
 }
-
 #tray {
-  margin-right: 8px;
-}
-
-tooltip {
-  background-color: #285477;
-  border: 1px solid white;
-}
-
-tooltip label {
-  padding: 5px;
+  padding-right: 12px;
 }

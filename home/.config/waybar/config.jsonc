@@ -1,66 +1,71 @@
 {
-  "reload_style_on_change": true,
   "layer": "top",
-  "position": "bottom",
-  "spacing": 0,
+  "position": "top",
   "height": 24,
-  "modules-left": ["sway/workspaces", "sway/mode"],
+  "spacing": 0,
+
+  "modules-left": [
+    "image#logo",
+    "sway/workspaces",
+    "custom/sep",
+    "sway/window",
+  ],
+
+  "modules-center": [ ],
+
   "modules-right": [
-    "bluetooth",
+    "custom/sep",
     "network",
-    "pulseaudio",
+    "custom/sep",
     "battery",
-    "custom/datetime",
+    "custom/sep",
+    "pulseaudio",
+    "custom/sep",
+    "clock",
     "group/tray-expander"
   ],
 
-  "custom/datetime": {
-    "format": "{text}",
+  "custom/sep": {
+    "format" : "|",
     "tooltip": false,
-    "interval": 60,
-    "exec": "$HOME/.config/sway/scripts/datetime.sh 2> /dev/null"
+    "interval" : 0
+  },
+
+  "image#logo": {
+    "path": "/home/manl/Downloads/linux-mint-logo.svg",
+    "size": 15,
+    "tooltip": false,
   },
 
   "network": {
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "format": "{icon}",
-    "format-ethernet": "󰀂",
-    "format-disconnected": "󰤮",
+    "format-ethernet": "ETH  {ifname}",
+    "format-wifi": "WIFI  {signalStrength}%",
+    "format-disconnected": "Network disconnected",
+    "format-disabled": "Network disabled",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "on-click": "cinnamon-settings network"
   },
 
   "battery": {
-    "format": "{icon} {capacity}%",
-    "format-plugged": "  {capacity}%",
-    "format-icons": {
-      "charging": ["󰢜 ", "󰂆 ", "󰂇 ", "󰂈 ", "󰢝 ", "󰂉 ", "󰢞 ", "󰂊 ", "󰂋 ", "󰂅 "],
-      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-    },
+    "format": "BAT  {capacity}%",
     "tooltip-format": "{time}",
     "interval": 5
   },
 
-  "bluetooth": {
-    "format": "",
-    "format-disabled": "󰂲",
-    "format-connected": "",
-    "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "blueman-manager"
-  },
-
   "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "   MUTE",
-    "format-icons": {
-      "default": [" ", " ", "  "]
-    },
+    "format": "VOL  {volume}%",
+    "format-muted": "MUTE",
     "on-click": "amixer set 'Master' toggle 1>/dev/null",
     "tooltip": false,
     "scroll-step": 2
+  },
+
+  "clock": {
+    "format": "{:%a, %b %d :: %Hh%M}",
+    "interval": 60,
+    "tooltip": false
   },
 
   "group/tray-expander": {
@@ -79,6 +84,8 @@
 
   "tray": {
     "icon-size": 12,
-    "spacing": 12
+    "spacing": 10
   }
 }
+
+// vim: filetype=jsonc

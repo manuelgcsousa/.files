@@ -11,6 +11,7 @@ let
     htop
     jq
     just
+    neovim
     nodejs_24
     pyenv
     ripgrep

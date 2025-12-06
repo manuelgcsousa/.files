@@ -26,6 +26,7 @@ return {
         },
       },
       ["gopls"] = {},
+      -- ["csharp_ls"] = {},
     }
     for server, config in pairs(servers) do
       lsp[server].setup(config)
